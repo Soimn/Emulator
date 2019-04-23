@@ -1,0 +1,36 @@
+version(1);
+
+project_name = "Emulator";
+
+patterns = {
+	"*.cpp",
+	"*.h",
+	"*.inl",
+	"*.bat",
+	"*.sh",
+	"*.4coder",
+};
+
+blacklist_patterns = {
+	".*",
+};
+
+load_paths = {
+	{{ {"./", .relative = true, .recursive = true } },
+	  .os = "win" },
+};
+
+command_list = {
+	{ .name = "build",
+	  .out  = "*compilation*", .footer_panel = true, .save_dirty_files = false, .cursor_at_end = true,
+	  .cmd  = {{"cl -W4 -Od -Z7 emulator.c", .os = "win"},},
+	},
+
+	{ .name = "run",
+	  .out  = "*run*", .footer_panel = true, .save_dirty_files = false, .cursor_at_end = true,
+	  .cmd  = {{"emulator.exe", .os = "win"},},
+	},
+};
+
+fkey_command[4] = "build";
+fkey_command[5] = "run";
